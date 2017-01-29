@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f256afa7-8862-40eb-9e24-294c28a000e8" name="super_mag" url="http://supermag">
+        <fileTransfer port="0" mountedRoot="C:\OpenServer\domains\supermag" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
