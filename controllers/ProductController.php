@@ -1,7 +1,6 @@
 <?php
 
-include_once ROOT . '/models/Category.php';
-include_once ROOT . '/models/Product.php';
+
 
 class ProductController
 {
@@ -11,7 +10,8 @@ class ProductController
 
         $categories = array();
         $categories = Category::getCategoriesList();
-        
+
+        $product = array();
         $product = Product::getProductById($productId);
 
         require_once(ROOT . '/views/product/view.php');

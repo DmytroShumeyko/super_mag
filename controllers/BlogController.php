@@ -1,6 +1,6 @@
 <?php
 
-include_once ROOT . '/models/Blog.php';
+
 
 class BlogController
 {
