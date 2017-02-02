@@ -80,7 +80,7 @@ class UserController
     }
 
     public function actionLogout(){
-
+        unset($_SESSION['products']);
         unset($_SESSION["user"]);
         header("Location: /");
     }
