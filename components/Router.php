@@ -1,18 +1,32 @@
 <?php
 
+/**
+ * Класс Router
+ * Компонент для работы с маршрутами
+ */
 class Router
 {
 
+    /**
+     * Свойство для хранения массива роутов
+     * @var array 
+     */
     private $routes;
 
+    /**
+     * Конструктор
+     */
     public function __construct()
     {
+        // Путь к файлу с роутами
         $routesPath = ROOT . '/config/routes.php';
+
+        // Получаем роуты из файла
         $this->routes = include($routesPath);
     }
 
     /**
-     * Returns request string
+     * Возвращает строку запроса
      */
     private function getURI()
     {
@@ -21,20 +35,23 @@ class Router
         }
     }
 
+    /**
+     * Метод для обработки запроса
+     */
     public function run()
     {
-        // Получить строку запроса
+        // Получаем строку запроса
         $uri = $this->getURI();
 
-        // Проверить наличие такого запроса в routes.php
+        // Проверяем наличие такого запроса в массиве маршрутов (routes.php)
         foreach ($this->routes as $uriPattern => $path) {
 
             // Сравниваем $uriPattern и $uri
             if (preg_match("~$uriPattern~", $uri)) {
-                
+
                 // Получаем внутренний путь из внешнего согласно правилу.
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-                                
+
                 // Определить контроллер, action, параметры
 
                 $segments = explode('/', $internalRoute);
@@ -43,9 +60,9 @@ class Router
                 $controllerName = ucfirst($controllerName);
 
                 $actionName = 'action' . ucfirst(array_shift($segments));
-                             
+
                 $parameters = $segments;
-                
+
                 // Подключить файл класса-контроллера
                 $controllerFile = ROOT . '/controllers/' .
                         $controllerName . '.php';
@@ -56,11 +73,13 @@ class Router
 
                 // Создать объект, вызвать метод (т.е. action)
                 $controllerObject = new $controllerName;
-                
 
+                /* Вызываем необходимый метод ($actionName) у определенного 
+                 * класса ($controllerObject) с заданными ($parameters) параметрами
+                 */
                 $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
 
-                
+                // Если метод контроллера успешно вызван, завершаем работу роутера
                 if ($result != null) {
                     break;
                 }
