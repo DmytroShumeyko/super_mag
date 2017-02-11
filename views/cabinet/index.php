@@ -1,17 +1,19 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
 
-    <section>
-        <div class="container">
-            <div class="row">
+<section>
+    <div class="container">
+        <div class="row">
 
-                <h1>User cabinet</h1>
-                <h3>Hi, <?php echo $user['name']; ?></h3>
-
-                <ul>
-                    <li><a href="/cabinet/edit/">Edit user data</a> </li>
-                    <li><a href="/cabinet/history/">Orders history</a> </li>
-                </ul>
-            </div>
+            <h3>Кабинет пользователя</h3>
+            
+            <h4>Привет, <?php echo $user['name'];?>!</h4>
+            <ul>
+                <li><a href="/cabinet/edit">Редактировать данные</a></li>
+                <!--<li><a href="/cabinet/history">Список покупок</a></li>-->
+            </ul>
+            
         </div>
-    </section>
+    </div>
+</section>
+
 <?php include ROOT . '/views/layouts/footer.php'; ?>
